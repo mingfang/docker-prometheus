@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sv start mysql || exit 1
+
+source /etc/envvars
+env
+
+cd /promdash
+
+exec 2>&1
+exec ./bin/env bin/bundle exec bin/thin start

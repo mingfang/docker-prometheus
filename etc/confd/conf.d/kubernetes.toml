@@ -1,0 +1,9 @@
+[template]
+src = "kubernetes.conf.tmpl"
+dest = "/prometheus/prometheus.yml"
+keys = [
+    "/registry/services/specs/default/",
+    "/registry/minions/"
+]
+
+reload_cmd = "sv restart prometheus"

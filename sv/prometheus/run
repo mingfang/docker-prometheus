@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#sv start socklog-unix || exit 1
+
+source /etc/envvars
+env
+
+cd /prometheus
+exec 2>&1
+exec ./prometheus -config.file=/prometheus/prometheus.yml -web.external-url="prometheus"

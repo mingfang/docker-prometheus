@@ -1,0 +1,1 @@
+docker run -v `pwd`/prometheus.yml:/prometheus.yml -p 7000:3000 -p 9090:9090 -v `pwd`:/docker -w /docker --rm -it prometheus /bin/bash
