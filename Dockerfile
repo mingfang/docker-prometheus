@@ -31,7 +31,6 @@ RUN apt-get install -y libssl-dev libmysqlclient-dev
 #PromDash
 RUN git clone https://github.com/prometheus/promdash.git
 RUN cd /promdash && \
-    git checkout fix-path-prefix && \
     cp config/database.yml.example config/database.yml && \
     make build
 
@@ -39,18 +38,19 @@ RUN cd /promdash && \
 RUN wget -O /usr/local/bin/confd  https://github.com/kelseyhightower/confd/releases/download/v0.10.0/confd-0.10.0-linux-amd64 && \
     chmod +x /usr/local/bin/confd
 
-ENV PROMDASH_PATH_PREFIX /promdash
+#ENV PROMDASH_PATH_PREFIX /promdash
 ENV PROMDASH_MYSQL_HOST localhost
 ENV PROMDASH_MYSQL_DATABASE promdash
 ENV PROMDASH_MYSQL_USERNAME root
 #ENV PROMDASH_MYSQL_PASSWORD
-ADD mysql.ddl /mysql.ddl
-ADD preparedb.sh /preparedb.sh
+COPY mysql.ddl /mysql.ddl
+COPY preparedb.sh /preparedb.sh
 RUN ./preparedb.sh
 
-ADD etc/confd /etc/confd
-ADD prometheus.yml /prometheus/prometheus.yml
+COPY etc/confd /etc/confd
+COPY prometheus.yml /prometheus/prometheus.yml
+COPY test.sh /
 
 #Add runit services
-ADD sv /etc/service 
+COPY sv /etc/service 
 
