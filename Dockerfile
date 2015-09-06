@@ -13,39 +13,15 @@ RUN echo 'export > /etc/envvars' >> /root/.bashrc
 
 #Utilities
 RUN apt-get install -y vim less net-tools inetutils-ping wget curl git telnet nmap socat dnsutils netcat tree htop unzip sudo software-properties-common jq psmisc
-RUN apt-get install -y build-essential
-
-#MySql
-RUN apt-get install -y mysql-server mysql-client
 
 #Prometheus
 RUN mkdir -p /prometheus && \
     cd /prometheus && \
     wget -O - https://github.com/prometheus/prometheus/releases/download/0.15.1/prometheus-0.15.1.linux-amd64.tar.gz | tar zxv
 
-#Required for PromDash
-ENV RAILS_ENV production
-RUN apt-get install -y libssl-dev libmysqlclient-dev
-#RUN gem install bundler
-
-#PromDash
-RUN git clone https://github.com/prometheus/promdash.git
-RUN cd /promdash && \
-    cp config/database.yml.example config/database.yml && \
-    make build
-
 #Confd
 RUN wget -O /usr/local/bin/confd  https://github.com/kelseyhightower/confd/releases/download/v0.10.0/confd-0.10.0-linux-amd64 && \
     chmod +x /usr/local/bin/confd
-
-#ENV PROMDASH_PATH_PREFIX /promdash
-ENV PROMDASH_MYSQL_HOST localhost
-ENV PROMDASH_MYSQL_DATABASE promdash
-ENV PROMDASH_MYSQL_USERNAME root
-#ENV PROMDASH_MYSQL_PASSWORD
-COPY mysql.ddl /mysql.ddl
-COPY preparedb.sh /preparedb.sh
-RUN ./preparedb.sh
 
 COPY etc/confd /etc/confd
 COPY prometheus.yml /prometheus/prometheus.yml
@@ -53,4 +29,3 @@ COPY test.sh /
 
 #Add runit services
 COPY sv /etc/service 
-
