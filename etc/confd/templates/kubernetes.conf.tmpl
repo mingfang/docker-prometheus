@@ -12,7 +12,7 @@ global:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
+  - job_name: 'prometheus_local'
     metrics_path: /prometheus/metrics
 
     target_groups:
@@ -27,3 +27,27 @@ scrape_configs:
 
     target_groups:
       - targets: [ {{range $index,$nodeJson := getvs "/registry/minions/*"}}{{$node := json $nodeJson}}{{if $index}}, {{end}}'{{$node.spec.externalID}}:10255'{{end}} ]
+
+{{range $serviceJson := getvs "/registry/services/specs/default/*"}}
+  {{$service := json $serviceJson}}
+  {{$defaultPort := index $service.spec.ports 0}}
+  {{if $service.metadata.annotations}}
+    {{$annotation := (index $service.metadata.annotations "metrics")}}
+    {{if $annotation}}
+
+  - job_name: '{{$service.metadata.name}}'
+    metrics_path: {{$annotation}}
+
+    target_groups:
+      - targets: [ 
+          {{range $index, $podJson := getvs "/registry/pods/default/*"}}
+            {{$pod := json $podJson}}
+            {{if eq $service.metadata.name $pod.metadata.labels.name}}
+            '{{$pod.status.podIP}}:{{$defaultPort.port}}' {{if $index}}, {{end}}
+            {{end}}
+          {{end}}
+        ]
+
+    {{end}}
+  {{end}}
+{{end}}

@@ -1,2 +1,2 @@
 # docker-prometheus
-Run Prometheus and PromDash Inside Docker
+Run Prometheus Inside Docker
