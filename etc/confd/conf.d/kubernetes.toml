@@ -7,5 +7,5 @@ keys = [
     "/registry/minions/"
 ]
 
-check_cmd = "/prometheus/promtool check-config /prometheus/prometheus.yml"
-reload_cmd = "sed -i -e '/^[[:space:]]*$/d' /prometheus/prometheus.yml && kill -HUP `cat /etc/service/prometheus/supervise/pid`"
+check_cmd = "sed -i -e '/^[[:space:]]*$/d' {{.src}} && /prometheus/promtool check-config {{.src}}"
+reload_cmd = "sv restart prometheus"
