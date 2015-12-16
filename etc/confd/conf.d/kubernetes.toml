@@ -8,4 +8,4 @@ keys = [
 ]
 
 check_cmd = "sed -i -e '/^[[:space:]]*$/d' {{.src}} && /prometheus/promtool check-config {{.src}}"
-reload_cmd = "sv restart prometheus"
+reload_cmd = "kill -HUP `cat /etc/service/prometheus/supervise/pid"
