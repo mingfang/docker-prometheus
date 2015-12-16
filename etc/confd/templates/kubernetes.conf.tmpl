@@ -43,7 +43,7 @@ scrape_configs:
           {{range $index, $podJson := getvs "/registry/pods/default/*"}}
             {{$pod := json $podJson}}
             {{if eq $service.metadata.name $pod.metadata.labels.name}}
-            '{{$pod.status.podIP}}:{{$defaultPort.port}}' {{if $index}}, {{end}}
+            '{{$pod.status.podIP}}:{{$defaultPort.port}}', 
             {{end}}
           {{end}}
         ]
