@@ -22,6 +22,10 @@ RUN wget -O /usr/local/bin/confd  https://github.com/kelseyhightower/confd/relea
 RUN wget -O - https://github.com/prometheus/prometheus/releases/download/0.16.1/prometheus-0.16.1.linux-amd64.tar.gz | tar zxv
 RUN mv prometheus* prometheus
 
+#Grafana
+RUN wget -O - https://grafanarel.s3.amazonaws.com/builds/grafana-2.6.0.linux-x64.tar.gz | tar zx
+RUN mv grafana* grafana
+
 COPY etc/confd /etc/confd
 COPY prometheus.yml /prometheus/prometheus.yml
 COPY test.sh /
