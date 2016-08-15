@@ -15,17 +15,17 @@ scrape_configs:
   - job_name: 'prometheus_local'
     metrics_path: /prometheus/metrics
 
-    target_groups:
+    static_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'kmaster'
 
-    target_groups:
+    static_configs:
       - targets: ['{{getenv "ETCD_HOST"}}:8080']
 
   - job_name: 'knode'
 
-    target_groups:
+    static_configs:
       - targets: [ {{range $index,$nodeJson := getvs "/registry/minions/*"}}{{$node := json $nodeJson}}{{if $index}}, {{end}}'{{$node.spec.externalID}}:10255'{{end}} ]
 
 {{range $serviceJson := getvs "/registry/services/specs/default/*"}}
@@ -38,7 +38,7 @@ scrape_configs:
   - job_name: '{{$service.metadata.name}}'
     metrics_path: {{$annotation}}
 
-    target_groups:
+    static_configs:
       - targets: [ 
           {{range $index, $podJson := getvs "/registry/pods/default/*"}}
             {{$pod := json $podJson}}
