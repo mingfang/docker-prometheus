@@ -1,1 +1,1 @@
-docker run -e ETCD_HOST=192.168.1.160 -p 3001:3000 -p 9090:9090 -v `pwd`:/docker -w /docker --rm -it prometheus /bin/bash
+docker run --dns=192.168.1.177 -e KMASTER="http://minux:8080" -p 9090:9090 -v `pwd`:/docker -w /docker --rm -it prometheus /bin/bash

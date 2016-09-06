@@ -3,8 +3,9 @@
 #sv start socklog-unix || exit 1
 
 source /etc/envvars
-env
 
-cd /prometheus
+sed -i -e "s|KMASTER|${KMASTER}|" /prometheus/prometheus.yml
+
+cd /prometheus 
 exec 2>&1
 exec ./prometheus -config.file=/prometheus/prometheus.yml
