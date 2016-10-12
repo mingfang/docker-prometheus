@@ -16,7 +16,7 @@ RUN echo 'export > /etc/envvars' >> /root/.bashrc
 RUN apt-get install -y --no-install-recommends vim less net-tools inetutils-ping wget curl git telnet nmap socat dnsutils netcat tree htop unzip sudo software-properties-common jq psmisc iproute
 
 #Prometheus
-RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.2.0/prometheus-1.2.0.linux-amd64.tar.gz | tar zxv
+RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.2.1/prometheus-1.2.1.linux-amd64.tar.gz | tar zxv
 RUN mv prometheus* prometheus
 
 #BlackBox Exporter
