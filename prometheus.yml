@@ -134,7 +134,7 @@ scrape_configs:
   - source_labels: [__address__]
     target_label: __param_target
   - target_label: __address__
-    replacement: blackbox
+    replacement: localhost:9115
   - source_labels: [__param_target]
     target_label: instance
   - action: labelmap
