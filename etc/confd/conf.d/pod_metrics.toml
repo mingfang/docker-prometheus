@@ -1,0 +1,8 @@
+[template]
+src = "pod_metrics.yml.tmpl"
+dest = "/etc/prometheus/pod_metrics.yml"
+keys = [
+    "/registry/pods/default"
+]
+
+check_cmd = "sed -i -e '/^[[:space:]]*$/d' {{.src}}"

@@ -4,8 +4,8 @@
 
 source /etc/envvars
 
-sed -i -e "s|KMASTER|${KMASTER}|" /prometheus/prometheus.yml
+sed -i -e "s|KMASTER|${KMASTER}|" /etc/prometheus/prometheus.yml
 
 cd /prometheus 
 exec 2>&1
-exec ./prometheus -config.file=/prometheus/prometheus.yml
+exec ./prometheus -config.file=/etc/prometheus/prometheus.yml -alertmanager.url=http://127.0.0.1:9093

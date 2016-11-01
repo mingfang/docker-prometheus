@@ -1,0 +1,13 @@
+{{range $serviceJson := getvs "/registry/services/specs/default/*"}}
+  {{$service := json $serviceJson}}
+  {{$defaultPort := index $service.spec.ports 0}}
+  {{if $service.metadata.annotations}}
+  {{if (index $service.metadata.annotations "prometheus.io/probe")}}
+- targets: ["{{$service.metadata.name}}:{{or (index $service.metadata.annotations "prometheus.io/port") $defaultPort.port}}{{replace (or (index $service.metadata.annotations "prometheus.io/path") "/") "\"" "" -1}}"]
+  labels:
+    {{range $name,$value := $service.metadata.labels}}
+    {{replace $name "-" "_" -1}}: "{{$value}}"
+    {{end}}
+  {{end}}
+  {{end}}
+{{end}}

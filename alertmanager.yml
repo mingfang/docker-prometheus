@@ -1,0 +1,2 @@
+#This is just a placeholder.  The actually file will be templated by /etc/confd/template/alertmanager.yml.toml
+global:

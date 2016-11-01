@@ -1,0 +1,8 @@
+[template]
+src = "liveness_probe.yml.tmpl"
+dest = "/etc/prometheus/liveness_probe.yml"
+keys = [
+    "/registry/pods/default"
+]
+
+check_cmd = "sed -i -e '/^[[:space:]]*$/d' {{.src}}"

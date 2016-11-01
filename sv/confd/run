@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source /etc/envvars
+
+until curl ${ETCD_URL}/v2/keys/registry -s -S -w "%{http_code}" -o /dev/null | grep 200; do echo "waiting for ETCD to come online..."; sleep 3; done
+
+exec 2>&1
+exec confd -watch=true -interval 30 -backend=etcd -node ${ETCD_URL}

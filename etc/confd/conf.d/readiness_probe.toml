@@ -1,0 +1,8 @@
+[template]
+src = "readiness_probe.yml.tmpl"
+dest = "/etc/prometheus/readiness_probe.yml"
+keys = [
+    "/registry/pods/default"
+]
+
+check_cmd = "sed -i -e '/^[[:space:]]*$/d' {{.src}}"

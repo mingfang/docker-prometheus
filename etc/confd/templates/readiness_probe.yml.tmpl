@@ -1,0 +1,12 @@
+{{range $podJson := getvs "/registry/pods/default/*"}}
+  {{$pod := json $podJson}}
+  {{range $index,$container := $pod.spec.containers}}
+    {{if $container.readinessProbe.httpGet}}
+- targets: ["{{$pod.metadata.name}}:{{$container.readinessProbe.httpGet.port}}{{$container.readinessProbe.httpGet.path}}"]
+  labels:
+    {{range $name,$value := $pod.metadata.labels}}
+    {{replace $name "-" "_" -1}}: "{{$value}}"
+    {{end}}
+    {{end}}
+  {{end}}
+{{end}}

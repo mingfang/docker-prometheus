@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source /etc/envvars
+
+cd /alertmanager 
+exec 2>&1
+exec ./alertmanager -config.file=/etc/alertmanager/alertmanager.yml
