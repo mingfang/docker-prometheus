@@ -4,5 +4,3 @@ dest = "/etc/prometheus/service_probe.yml"
 keys = [
     "/registry/services/specs/default"
 ]
-
-check_cmd = "sed -i -e '/^[[:space:]]*$/d' {{.src}}"

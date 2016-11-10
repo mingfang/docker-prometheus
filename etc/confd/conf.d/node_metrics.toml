@@ -4,5 +4,3 @@ dest = "/etc/prometheus/node_metrics.yml"
 keys = [
     "/registry/minions/"
 ]
-
-check_cmd = "sed -i -e '/^[[:space:]]*$/d' {{.src}}"
