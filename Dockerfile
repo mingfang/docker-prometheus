@@ -35,6 +35,7 @@ COPY prometheus.yml /etc/prometheus/
 COPY alert.rules /etc/prometheus/rules/
 COPY alertmanager.yml /etc/alertmanager/
 COPY etc/confd /etc/confd
+COPY test.sh /
 
 # Add runit services
 COPY sv /etc/service 
