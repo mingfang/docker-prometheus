@@ -1,6 +1,7 @@
 [template]
 src = "service_probe.yml.tmpl"
 dest = "/etc/prometheus/service_probe.yml"
+prefix = "/registry/services/specs/default"
 keys = [
-    "/registry/services/specs/default"
+    "/"
 ]

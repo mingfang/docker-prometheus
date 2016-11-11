@@ -1,6 +1,7 @@
 [template]
 src = "readiness_probe.yml.tmpl"
 dest = "/etc/prometheus/readiness_probe.yml"
+prefix = "/registry/pods/default"
 keys = [
-    "/registry/pods/default"
+    "/"
 ]

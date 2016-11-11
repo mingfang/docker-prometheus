@@ -1,8 +1,9 @@
 [template]
 src = "alertmanager.yml.tmpl"
 dest = "/etc/alertmanager/alertmanager.yml"
+prefix = "/registry/services/specs/default"
 keys = [
-    "/registry/services/specs/default/"
+    "/"
 ]
 
 reload_cmd = "kill -HUP `cat /etc/service/alertmanager/supervise/pid`"

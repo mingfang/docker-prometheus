@@ -1,6 +1,7 @@
 [template]
 src = "pod_metrics.yml.tmpl"
 dest = "/etc/prometheus/pod_metrics.yml"
+prefix = "/registry/pods/default"
 keys = [
-    "/registry/pods/default"
+    "/"
 ]

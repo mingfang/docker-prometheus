@@ -1,6 +1,7 @@
 [template]
 src = "node_metrics.yml.tmpl"
 dest = "/etc/prometheus/node_metrics.yml"
+prefix = "/registry/minions"
 keys = [
-    "/registry/minions/"
+    "/"
 ]
