@@ -1,4 +1,4 @@
-{{range $podJson := getvs "/registry/pods/default/*"}}
+{{range $podJson := getvs "/*"}}
   {{$pod := json $podJson}}
   {{range $index,$container := $pod.spec.containers}}
     {{if $container.readinessProbe.httpGet}}

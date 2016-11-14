@@ -1,4 +1,4 @@
-{{range $nodeJson := getvs "/registry/minions/*"}}
+{{range $nodeJson := getvs "/*"}}
   {{$node := json $nodeJson}}
 - targets: ['{{$node.spec.externalID}}:10255']
   labels:

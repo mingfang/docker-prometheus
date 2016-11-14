@@ -1,4 +1,4 @@
-{{range $serviceJson := getvs "/registry/services/specs/default/*"}}
+{{range $serviceJson := getvs "/*"}}
   {{$service := json $serviceJson}}
   {{$defaultPort := index $service.spec.ports 0}}
   {{if $service.metadata.annotations}}

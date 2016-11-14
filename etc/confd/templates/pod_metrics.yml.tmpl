@@ -1,4 +1,4 @@
-{{range $podJson := getvs "/registry/pods/default/*"}}
+{{range $podJson := getvs "/*"}}
   {{$pod := json $podJson}}
   {{if (index $pod.metadata.annotations "prometheus.io/scrape")}}
 - targets: ["{{$pod.metadata.name}}:{{index $pod.metadata.annotations "prometheus.io/port"}}"]
