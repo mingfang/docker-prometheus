@@ -1,10 +1,5 @@
 global:
 
-{{$SLACK_API_URL := getenv "SLACK_API_URL"}}
-{{if $SLACK_API_URL}}
-  slack_api_url: {{$SLACK_API_URL}}
-{{end}}
-
 # The directory from which notification templates are read.
 templates: 
 - '/etc/alertmanager/template/*.tmpl'
@@ -55,5 +50,10 @@ inhibit_rules:
 
 receivers:
 - name: default-receiver
+{{$SLACK_API_URL := getenv "SLACK_API_URL"}}
+{{if $SLACK_API_URL}}
   slack_configs:
-  - send_resolved: true
+  - slack_api_url: {{$SLACK_API_URL}}
+    send_resolved: true
+{{end}}
+
