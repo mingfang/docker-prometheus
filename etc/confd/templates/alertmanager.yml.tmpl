@@ -53,7 +53,7 @@ receivers:
 {{$SLACK_API_URL := getenv "SLACK_API_URL"}}
 {{if $SLACK_API_URL}}
   slack_configs:
-  - slack_api_url: {{$SLACK_API_URL}}
+  - api_url: {{$SLACK_API_URL}}
     send_resolved: true
 {{end}}
 
