@@ -22,7 +22,7 @@ RUN wget -O /usr/local/bin/confd  https://github.com/kelseyhightower/confd/relea
     chmod +x /usr/local/bin/confd
 
 #Prometheus
-RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.5.2/prometheus-1.5.2.linux-amd64.tar.gz | tar zxv
+RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.6.0/prometheus-1.6.0.linux-amd64.tar.gz | tar zxv
 RUN mv prometheus* prometheus
 
 #BlackBox Exporter
