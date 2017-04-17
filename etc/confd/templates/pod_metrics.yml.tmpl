@@ -7,5 +7,6 @@
     {{replace $name "-" "_" -1}}: "{{$value}}"
     {{end}}
     metrics_path: {{or (index $pod.metadata.annotations "prometheus.io/path") "/metrics"}}
+    no_alert: {{or (index $pod.metadata.annotations "prometheus.io/no_alert") "false"}}
   {{end}}
 {{end}}
