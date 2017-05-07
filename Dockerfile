@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:16.04 as base
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
@@ -15,22 +15,22 @@ RUN apt-get install -y --no-install-recommends runit
 CMD export > /etc/envvars && /usr/sbin/runsvdir-start
 
 # Utilities
-RUN apt-get install -y --no-install-recommends vim less net-tools inetutils-ping wget curl git telnet nmap socat dnsutils netcat tree htop unzip sudo software-properties-common jq psmisc iproute python ssh rsync
+RUN apt-get install -y --no-install-recommends vim less net-tools inetutils-ping wget curl git telnet nmap socat dnsutils netcat tree htop unzip sudo software-properties-common jq psmisc iproute python ssh rsync gettext-base
 
 #Confd
 RUN wget -O /usr/local/bin/confd  https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 && \
     chmod +x /usr/local/bin/confd
 
 #Prometheus
-RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.6.0/prometheus-1.6.0.linux-amd64.tar.gz | tar zxv
+RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.6.1/prometheus-1.6.1.linux-amd64.tar.gz | tar zxv
 RUN mv prometheus* prometheus
 
 #BlackBox Exporter
-RUN wget -O - https://github.com/prometheus/blackbox_exporter/releases/download/v0.4.0/blackbox_exporter-0.4.0.linux-amd64.tar.gz | tar zx
+RUN wget -O - https://github.com/prometheus/blackbox_exporter/releases/download/v0.5.0/blackbox_exporter-0.5.0.linux-amd64.tar.gz | tar zx
 RUN mv blackbox_exporter* blackbox_exporter
 
 #Alertmanager
-RUN wget -O - https://github.com/prometheus/alertmanager/releases/download/v0.5.1/alertmanager-0.5.1.linux-amd64.tar.gz | tar zx
+RUN wget -O - https://github.com/prometheus/alertmanager/releases/download/v0.6.1/alertmanager-0.6.1.linux-amd64.tar.gz | tar zx
 RUN mv alertmanager* alertmanager
 
 COPY prometheus.yml /etc/prometheus/
