@@ -6,4 +6,4 @@ source /etc/envvars
 
 cd /blackbox_exporter
 exec 2>&1
-exec ./blackbox_exporter -config.file=blackbox.yml 
+exec ./blackbox_exporter --config.file=blackbox.yml 
