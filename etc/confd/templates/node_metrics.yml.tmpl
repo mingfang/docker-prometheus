@@ -1,6 +1,6 @@
 {{range $nodeJson := getvs "/*"}}
   {{$node := json $nodeJson}}
-- targets: ['{{$node.spec.externalID}}:10255']
+- targets: ['{{$node.spec.externalID}}:4194']
   labels:
     {{range $name,$value := $node.metadata.labels}}
     {{replace (replace (replace $name "-" "_" -1) "." "_" -1) "/" "_" -1}}: "{{$value}}"
