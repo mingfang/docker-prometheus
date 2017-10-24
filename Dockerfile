@@ -21,20 +21,16 @@ RUN wget -O /usr/local/bin/confd  https://github.com/kelseyhightower/confd/relea
     chmod +x /usr/local/bin/confd
 
 #Prometheus
-RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.8.0/prometheus-1.8.0.linux-amd64.tar.gz | tar zxv
+RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.8.1/prometheus-1.8.1.linux-amd64.tar.gz | tar zxv
 RUN mv prometheus* prometheus
 
 #BlackBox Exporter
-RUN wget -O - https://github.com/prometheus/blackbox_exporter/releases/download/v0.8.1/blackbox_exporter-0.8.1.linux-amd64.tar.gz | tar zx
+RUN wget -O - https://github.com/prometheus/blackbox_exporter/releases/download/v0.10.0/blackbox_exporter-0.10.0.linux-amd64.tar.gz | tar zx
 RUN mv blackbox_exporter* blackbox_exporter
 
 #Alertmanager
-RUN wget -O - https://github.com/prometheus/alertmanager/releases/download/v0.8.0/alertmanager-0.8.0.linux-amd64.tar.gz | tar zx
+RUN wget -O - https://github.com/prometheus/alertmanager/releases/download/v0.9.1/alertmanager-0.9.1.linux-amd64.tar.gz | tar zx
 RUN mv alertmanager* alertmanager
-
-#StatsD
-RUN wget -O - https://github.com/prometheus/statsd_exporter/releases/download/v0.4.0/statsd_exporter-0.4.0.linux-amd64.tar.gz | tar zx
-RUN mv statsd_exporter* statsd_exporter
 
 COPY prometheus.yml /etc/prometheus/
 COPY alert.rules /etc/prometheus/rules/
