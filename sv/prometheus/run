@@ -5,7 +5,9 @@
 source /etc/envvars
 
 sed -i -e "s|KMASTER|${KMASTER}|" /etc/prometheus/prometheus.yml
+DATA="${DATA="/data"}"
+mkdir -p "$DATA"
 
 cd /prometheus 
 exec 2>&1
-exec ./prometheus -config.file=/etc/prometheus/prometheus.yml -alertmanager.url=http://127.0.0.1:9093
+exec ./prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path="$DATA"

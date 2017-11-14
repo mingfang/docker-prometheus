@@ -21,7 +21,7 @@ RUN wget -O /usr/local/bin/confd  https://github.com/kelseyhightower/confd/relea
     chmod +x /usr/local/bin/confd
 
 #Prometheus
-RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v1.8.1/prometheus-1.8.1.linux-amd64.tar.gz | tar zxv
+RUN wget -O - https://github.com/prometheus/prometheus/releases/download/v2.0.0/prometheus-2.0.0.linux-amd64.tar.gz | tar zxv
 RUN mv prometheus* prometheus
 
 #BlackBox Exporter
@@ -29,11 +29,11 @@ RUN wget -O - https://github.com/prometheus/blackbox_exporter/releases/download/
 RUN mv blackbox_exporter* blackbox_exporter
 
 #Alertmanager
-RUN wget -O - https://github.com/prometheus/alertmanager/releases/download/v0.9.1/alertmanager-0.9.1.linux-amd64.tar.gz | tar zx
+RUN wget -O - https://github.com/prometheus/alertmanager/releases/download/v0.10.0/alertmanager-0.10.0.linux-amd64.tar.gz | tar zx
 RUN mv alertmanager* alertmanager
 
 COPY prometheus.yml /etc/prometheus/
-COPY alert.rules /etc/prometheus/rules/
+COPY alert.rules.yml /etc/prometheus/rules/
 COPY alertmanager.yml /etc/alertmanager/
 COPY etc/confd /etc/confd
 COPY test.sh /

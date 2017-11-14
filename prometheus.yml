@@ -67,4 +67,8 @@ scrape_configs:
         replacement: localhost:9115
       - source_labels: [__param_target]
         target_label: instance
-
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
